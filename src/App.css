@@ -79,3 +79,10 @@
     align-items: center;
     column-gap: 900px;
   }
+.complete{
+  text-decoration-style: solid;
+  text-decoration-line: line-through;
+  text-decoration-color: orangered;
+  opacity: 0.6;
+}
+

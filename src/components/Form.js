@@ -1,6 +1,7 @@
 import React,{useEffect} from 'react';
 import { Button } from '@mui/material';
 import { v4 as uuidv4 } from "uuid";
+// import { useState } from 'react';
 const Form = ({ name, setName, description, setDescription, todos, setTodos ,editTodo,setEditTodo}) => {
     const handleName = (event) =>{
         setName(event.target.value)
@@ -9,10 +10,10 @@ const Form = ({ name, setName, description, setDescription, todos, setTodos ,edi
         setDescription(event.target.value)
 
     }
-    const updateTodo = (name,description,id,)=>{
+    const updateTodo = (name,description,id,completed)=>{
 
         const newTodo =  todos.map((todo)=>
-            todo.id === id?{name,description,id}:todo
+            todo.id === id?{name,description,id,completed}:todo
         )
         setTodos(newTodo)
         setEditTodo("")
@@ -33,13 +34,13 @@ const Form = ({ name, setName, description, setDescription, todos, setTodos ,edi
         event.preventDefault();
         if(!editTodo)
         {
-            setTodos([...todos,{id:uuidv4(),name:name,description:description}])
+            setTodos([...todos,{id:uuidv4(),name:name,description:description,completed:false}])
             setName("")
             setDescription("")
         }
         else
         {
-            updateTodo(name,description,editTodo.id,editTodo.description)
+            updateTodo(name,description,editTodo.id,editTodo.description,editTodo.completed)
         }
        
     }
@@ -50,7 +51,7 @@ const Form = ({ name, setName, description, setDescription, todos, setTodos ,edi
             <input type="text" className="name" placeholder="Enter Description" value={description} onChange={handleDescription}/>
             <Button variant="contained" type="submit" className='buttoncls' size="medium"  color="success">
             {editTodo? "Ok" : "Add Todo" }
-                        </Button>
+            </Button>
            
                 </div>
         </form>
